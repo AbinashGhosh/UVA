@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -51,10 +50,59 @@ typedef  vector <ll > vl;
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
 
+long long a[1005],fib[43],b[1005];
+void divisor(int n)
+{
+    for(int i=2;i<=sqrt(n);i++)
+    {
+        while(n%i==0)
+        {
+            a[i]++;
+            n=n/i;
+        }
+        if(n==0)break;
+    }
+    if(n!=0)a[n]=1;
+}
+void divisor2(int n)
+{
+    for(int i=2;i<=sqrt(n);i++)
+    {
+        while(n%i==0)
+        {
+            b[i]++;
+            n=n/i;
+        }
+        if(n==0)break;
+        //pr(b[i]);
+    }
+    if(n!=0)b[n]=1;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int T;
+    fib[0]=0;
+    fib[1]=1;
+    FOR(i,2,41)
+    fib[i]=fib[i-2]+fib[i-1];
+    int x,y,z;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        scanf("%d%d%d",&z,&x,&y);
+        FOR(j,0,1004)a[j]=0;
+        FOR(j,0,1004)b[j]=0;
+        divisor(x);divisor2(y);
+        FOR(i,2,1004)
+        {
+            //pr2(a[i],b[i]);
+            long long sum=a[i]*fib[z-1]+b[i]*fib[z];
+            if(sum!=0)
+                printf("%d %lld\n",i,sum);
+        }
+        printf("\n");
+    }
     return 0;
 }

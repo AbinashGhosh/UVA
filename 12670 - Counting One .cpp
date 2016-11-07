@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -33,11 +32,11 @@ using  namespace  std;
 #define FOR(i, b, e) for(int i = b; i <= e; i++)
 #define pr(x) cout<<x<<"\n"
 #define pr2(x,y) cout<<x<<" "<<y<<"\n"
-#define pr3(x,y,z) cout<<x<<" "<<y<<" "<<z<<"\n";
 #define READ(f) freopen(f, "r", stdin)
 #define WRITE(f) freopen(f, "w", stdout)
 
 typedef  long long ll;
+typedef  unsigned long long ull;
 typedef  pair <int, int> pii;
 typedef  pair <double , double> pdd;
 typedef  pair <ll , ll > pll;
@@ -50,11 +49,35 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+int y=0;
+ull f(ull n)
+{
+    //pr(n);
+    if(n==0||n==1)return n;
+    int p;
+    ull q=n;
+    for(p=0,q=n;q>0;q=q>>1,p++);//pr(p);
+    p--;
+    //pr(p);
+    ull lp=(ull)1<<p;
+    //pr(lp);
+    ull ans= p*(lp>>1)+(n-lp+1)+f(n-lp);
+   // pr2(ans,n);
 
+    return ans;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    ull a,b;
+    while(scanf("%llu %llu",&a,&b)!=EOF)
+    {
+        //pr(f(a-1));
+        ull ans= f(b)-f(a-1);
+        printf("%llu\n",ans);
+    }
     return 0;
 }
+
+

@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -45,6 +44,7 @@ typedef  vector <int> vi;
 typedef  vector <pii> vpii;
 typedef  vector <ll > vl;
 
+
 //int dx[]={1,0,-1,0};int dy[]={0,1,0,-1}; //4 Direction
 //int dx[]={1,1,0,-1,-1,-1,0,1};
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
@@ -55,6 +55,38 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int T,n,sq,res;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        scanf("%d",&n);
+        if(n%8==7)
+        {
+            printf("-1\n");
+            continue;
+        }
+        sq=(int)(sqrt(n)+EPS);
+        bool b=false;
+        FOR(i,0,sq)
+        {
+            FOR(j,i,sq)
+            {
+                res=i*i+j*j;
+                if(res>=n)break;
+                res=n-res;
+                int sqtest=(int)(sqrt(res)+EPS);
+                if(sqtest*sqtest==res)
+                {
+                    b=true;
+                    printf("%d %d %d\n",i,j,sqtest);
+                    break;
+                }
+            }
+            if(b)break;
+        }
+        if(!b)printf("-1\n");
+    }
     return 0;
 }
+
+

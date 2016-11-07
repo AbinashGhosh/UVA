@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -50,11 +49,40 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+int n,k;
+pii p[55];
+bool cmp(pii a,pii b)
+{
+    return atan2(a.x,a.y)>atan2(b.x,b.y);
+}
+int dp[52][52][2502];
+int vs[52][52][2502];
+int solve(int pos,int num,int h)
+{
+    //pr3(pos,num,h);
+    if(pos<0||num==0)return 0;
+    if(vs[pos][num][h]==true)return dp[pos][num][h];
+    vs[pos][num][h]==true;
+    int ret=solve(pos-1,num,h);
+    ret=max(ret,2*h*p[pos].x+p[pos].x*p[pos].y+solve(pos-1,num-1,h+p[pos].y));
+    return dp[pos][num][h]=ret;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int T;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        mem(vs,false);
+        scanf("%d%d",&n,&k);
+        FOR(i,0,n-1)
+        scanf("%d%d",&p[i].x,&p[i].y);
+        sort(p,p+n,cmp);
+        int  ans=solve(n-1,k,0);
+        printf("Case %d: %d\n",t,ans);
+    }
     return 0;
 }
+

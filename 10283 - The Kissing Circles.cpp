@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -22,7 +21,7 @@ using  namespace  std;
 
 #define PI acos(-1.0)
 #define MAX 10000007
-#define EPS 1e-9
+#define EPS 1e-12
 #define mem(a,b) memset(a,b,sizeof(a))
 #define gcd(a,b) __gcd(a,b)
 #define pb push_back
@@ -55,6 +54,32 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int n;
+    double R,r,x,angle,seg,blue;
+    while(scanf("%lf%d",&R,&n)!=EOF)
+    {
+        if( n == 1 )
+        {
+            printf("%.10lf %.10lf %.10lf\n",R,0.0,0.0);
+            continue ;
+        }
+        if( n == 2 )
+        {
+            printf("%.10lf %.10lf %.10lf\n",R/2.00,0.0,PI*R*R/2.00);
+            continue ;
+        }
+        double Angle=PI/n*1.0;
+        x=R/(1+sin(Angle));
+        r=R-x;
+        angle=(PI-Angle*2)/2.0;
+        seg=2*(angle*0.5*r*r);
+        double s=(x+x+2*r)/2.0;
+        double tarea=sqrt(s*(s-x)*(s-x)*(s-2*r));
+       // pr2(seg,tarea);
+        blue=n*(tarea-seg);
+        double green=PI*R*R-blue-n*PI*r*r;
+        printf("%.10lf %.10lf %.10lf\n",r,blue+EPS,green+EPS);
+    }
     return 0;
 }
+

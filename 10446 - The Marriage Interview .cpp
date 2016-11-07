@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -45,16 +44,35 @@ typedef  vector <int> vi;
 typedef  vector <pii> vpii;
 typedef  vector <ll > vl;
 
+
 //int dx[]={1,0,-1,0};int dy[]={0,1,0,-1}; //4 Direction
 //int dx[]={1,1,0,-1,-1,-1,0,1};
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+typedef unsigned long long int datatype;
 
+datatype dp[65][65];
+datatype trib(int n, int back)
+{
+    if(n<=1) return 1;
+    if(dp[n][back]!=0)return dp[n][back];
+    dp[n][back]=1;
+    for(int i=1;i<=back;i++)
+         dp[n][back]+=trib(n-i,back);
+    return dp[n][back];
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
+    int a,b,t=1;
+    while(scanf("%d%d",&a,&b))
+    {
+        if( a>60)break;
 
+        printf("Case %d: %lld\n",t++,trib(a,b));
+    }
     return 0;
 }
+

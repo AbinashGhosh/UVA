@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -45,16 +44,72 @@ typedef  vector <int> vi;
 typedef  vector <pii> vpii;
 typedef  vector <ll > vl;
 
+
 //int dx[]={1,0,-1,0};int dy[]={0,1,0,-1}; //4 Direction
 //int dx[]={1,1,0,-1,-1,-1,0,1};
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+char grid[130][20][50];
+char gres[20][50];
+bool detect[140];
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int n,q;
+    char str[100];
+    scanf("%d%d\n",&n,&q);
+    scanf("%s",str);
+    FOR(k,0,n-1)
+    {
+        FOR(i,0,16)
+        {
+            scanf("%s",grid[str[k]][i]);
+        }
+    }
+    FOR(Q,1,q)
+    {
+        scanf("%s",str);
+        //mem(gres,'.');
+        FOR(i,0,16) FOR(j,0,42) gres[i][j]='.';
+        int len=strlen(str);
+        FOR(l,0,len-1)
+        {
+            FOR(i,0,16)
+            {
+                FOR(j,0,42)
+                {
+                    if(grid[str[l]][i][j]=='*')
+                    {
+                        if(gres[i][j]=='.')
+                           gres[i][j]=str[l];
+                        else gres[i][j]='#';
+                    }
+                }
+            }
+        }
+        mem(detect,false);
+        FOR(i,0,16)
+        {
+            FOR(j,0,42)
+            {
+                if(gres[i][j]!='.'&&gres[i][j]!='#')
+                {
+                    detect[gres[i][j]]=true;
+                }
+            }
+        }
+        printf("Query %d: ",Q);
+        FOR(i,0,len-1)
+        {
+            if(detect[str[i]])printf("Y");
+            else printf("N");
+        }
+        printf("\n");
+    }
     return 0;
 }
+
+
+

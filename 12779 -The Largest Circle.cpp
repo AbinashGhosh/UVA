@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -51,10 +50,38 @@ typedef  vector <ll > vl;
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
 
+inline ll Distance(pll a,pll b)
+{
+    return (a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y);
+}
+inline ll cross(pll a, pll b, pll c)
+{
+    return abs((b.x-a.x)*(c.y-a.y)-(c.x-a.x)*(b.y-a.y));
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    pll p[5];
+    ll dt[3],d,A,g,Ar,dr;
+    int ch=0;
+    while(1)
+    {
+        ch=0;
+        FOR(i,0,3){
+        scanf("%lld%lld",&p[i].x,&p[i].y);
+        if(p[i].x==0&&p[i].y==0)ch++;
+        }
+        if(ch==4)break;
+         dt[0]=Distance(p[0],p[1]);
+         dt[1]=Distance(p[1],p[2]);
+        d=4*max(dt[0],dt[1]);
+        A=cross(p[0],p[1],p[2]);
+        A=A*A;
+        g=gcd(A,d);
+        A/=g;
+        d/=g;
+        printf("(%lld/%lld)*pi\n",A,d);
+    }
     return 0;
 }

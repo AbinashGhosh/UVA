@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -50,11 +49,36 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+double a;
+bool chk(double x,double y,double xx,double yy)
+{
+    return a*a>((x-xx)*(x-xx)+(y-yy)*(y-yy));
+}
+bool solve(double x,double y)
+{
+    if(chk(x,y,0,0)&&chk(x,y,a,0)&&chk(x,y,0,a)&&chk(x,y,a,a))
+        return true;
+    return false;
+}
 
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int n;
+    double x,y;
+    while(scanf("%d%lf",&n,&a)==2)
+    {
+        if(n==0)break;
+        int cnt=0;
+        FOR(i,1,n)
+        {
+            scanf("%lf%lf",&x,&y);
+            if(solve(x,y))cnt++;
+        }
+        double ans=(cnt*a*a)/n+EPS;
+        printf("%.5lf\n",ans);
+    }
     return 0;
 }
+

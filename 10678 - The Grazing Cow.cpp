@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -55,6 +54,18 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
+    int T;
+    double l,d;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        scanf("%lf%lf",&d,&l);
+        double a=sqrt(((l*l)/4)-((d*d)/4));
+        double b=l/2;
+        double ans=a*b*PI;
+        printf("%.3lf\n",ans+EPS);
+    }
+
 
     return 0;
 }

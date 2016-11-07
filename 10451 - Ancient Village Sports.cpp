@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -55,6 +54,20 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int n,t=1;
+    double PA;
+    while(scanf("%d%lf",&n,&PA)==2)
+    {
+        if(n<3)break;
+        double tA=PA/(n*2.0);
+        double angle=360.0/(n*2.0);
+        double angle2=(180.0-angle*2.0)/2.0;
+        double normal=2*tA*tan(angle2*PI/180.0);
+        double crossreg=PA-PI*normal;
+        double R=sqrt(normal)/sin(angle2*PI/180.0);
+        double dotreg=PI*R*R-PA;
+        printf("Case %d: %.5lf %.5lf\n",t++,dotreg,crossreg);
+    }
     return 0;
 }
+

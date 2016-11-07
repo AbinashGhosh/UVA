@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -45,16 +44,37 @@ typedef  vector <int> vi;
 typedef  vector <pii> vpii;
 typedef  vector <ll > vl;
 
+
 //int dx[]={1,0,-1,0};int dy[]={0,1,0,-1}; //4 Direction
 //int dx[]={1,1,0,-1,-1,-1,0,1};
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+int n,m,w,dp[10005];
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
 
+    while(scanf("%d%d%d",&n,&m,&w)!=EOF)
+    {
+        mem(dp,-1);
+        dp[0]=0;
+        FOR(i,0,w)
+        {
+            if(i>=n&&dp[i-n]!=-1)dp[i]=dp[i-n]+1;
+            if(i>=m&&dp[i-m]!=-1)dp[i]=max(dp[i],dp[i-m]+1);
+        }
+        for(int i=w;i>=0;i--)
+        {
+            if(dp[i]>=0)
+            {
+                if(i==w)printf("%d\n",dp[i]);
+                else printf("%d %d\n",dp[i],w-i);
+                break;
+            }
+        }
+    }
     return 0;
 }
+

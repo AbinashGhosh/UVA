@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -21,7 +20,7 @@
 using  namespace  std;
 
 #define PI acos(-1.0)
-#define MAX 10000007
+#define MAX 1000000
 #define EPS 1e-9
 #define mem(a,b) memset(a,b,sizeof(a))
 #define gcd(a,b) __gcd(a,b)
@@ -50,11 +49,37 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+int N;
+ll dp[105][105];
+ll solve(int k,int n)
+{
+    if(k==1)
+    {
+        if(n<=N)
+        return 1;
+        return 0;
+    }
+    if(dp[k][n]!=-1)return dp[k][n];
+    ll ans=0;
+    FOR(i,0,N)
+    {
+        if(n-i>=0)
+        ans=(ans+(solve(k-1,n-i))%MAX)%MAX;
+    }
+    return dp[k][n]=ans;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int k;
+    while(scanf("%d%d",&N,&k)==2)
+    {
+        if(N==0&&k==0)break;
+        mem(dp,-1);
+        ll ans=solve(k,N)%MAX;
+        pr(ans);
+    }
     return 0;
 }
+

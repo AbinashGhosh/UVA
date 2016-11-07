@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -55,6 +54,29 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
+    int T,r1,r2;
+    double ans;
+    scanf("%d\n",&T);
+    string str;
+    FOR(k,1,T)
+    {
+        getline(cin,str);
+        istringstream ss(str);
+        int a[2],i=0;
+        while(ss>>a[i])i++;
+        if(i==1)
+        {
+            double t=(double)a[0];
+            ans=(t/2)*(t/2)*PI-2*(t/4)*(t/4)*PI+EPS;
+        }
+        else
+        {
+            r1=a[0],r2=a[1];
+            ans=((r1+r2))*((r1+r2))*PI-(r1)*(r1)*PI-(r2)*(r2)*PI+EPS;
+        }
+        printf("%.4lf\n",ans);
+    }
 
     return 0;
 }
+

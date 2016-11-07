@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -50,11 +49,48 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+int v,val[102],n,res;
+int dp[10002];
+int solve(int i,int sum)
+{
+    pr2(i,sum);
+    if(sum>=v||i==n+1)
+    {
+        if(sum>=v)
+        {
+            if(res<sum)
+                return 10000000;
+            else
+            {
+                res=min(res,sum);
+                return 0;
+            }
+        }
+        return 10000000;
+    }
+    //if(dp[sum]!=-1)return dp[sum];
+    int temp=0,ans=0;
+    if(res>sum+val[i])
+    ans=1+solve(i+1,sum+val[i]);
+    temp=solve(i+1,sum);
+    ans=min(ans,temp);pr(ans);
+    return dp[sum]=ans;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    int T;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        mem(dp,-1);
+        scanf("%d%d",&v,&n);
+        FOR(i,1,n)scanf("%d",&val[i]);
+        res=1000000;
+        int ans=solve(1,0);
+        printf("%d %d\n",res,dp[0]);
+    }
     return 0;
 }
+

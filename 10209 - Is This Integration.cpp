@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -55,6 +54,15 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    double a;
+    while(scanf("%lf",&a)!=EOF)
+    {
+        double sector=(PI*a*a)/12.0;
+        double h=sqrt(a*a-a*a/4);
+        double z=(a*a)-2*sector-(a/2)*h;
+        double y=a*a-2*z-(PI*(a*a))/4;
+        double x=a*a-4*y-4*z;
+        printf("%.3lf %.3lf %.3lf\n",x+EPS,4*y+EPS,4*z+EPS);
+    }
     return 0;
 }

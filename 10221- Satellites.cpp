@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -22,7 +21,7 @@ using  namespace  std;
 
 #define PI acos(-1.0)
 #define MAX 10000007
-#define EPS 1e-9
+#define EPS 1e-11
 #define mem(a,b) memset(a,b,sizeof(a))
 #define gcd(a,b) __gcd(a,b)
 #define pb push_back
@@ -55,6 +54,28 @@ int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    double s,angle,deg,chord,arc;
+    int a;
+    char str[10];
+    while(scanf("%lf%d",&s,&a)!=EOF)
+    {
+        getchar();
+        scanf("%s",str);
+        deg=0.0;
+        if(strcmp(str,"min")==0)
+        {
+            int temp=(a/60);
+            deg+=(double)temp;
+            temp=(a%60);
+            deg+=((double)temp)/60.0;
+        }
+        else deg=a;
+        angle=deg*PI/180;
+        angle=min(angle,2*PI-angle);
+        s+=6440;
+        arc=angle*s;
+        chord=sqrt(s*s+s*s-2*s*s*cos(angle));
+        printf("%.6lf %.6lf\n",arc+EPS,chord+EPS);
+    }
     return 0;
 }

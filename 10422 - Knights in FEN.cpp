@@ -44,17 +44,66 @@ typedef  pair <ll , ll > pll;
 typedef  vector <int> vi;
 typedef  vector <pii> vpii;
 typedef  vector <ll > vl;
+typedef  pair <string, pii> psii;
 
 //int dx[]={1,0,-1,0};int dy[]={0,1,0,-1}; //4 Direction
 //int dx[]={1,1,0,-1,-1,-1,0,1};
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
-//int dx[]={2,1,-1,-2,-2,-1,1,2};
-//int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+int dx[]={2,1,-1,-2,-2,-1,1,2};
+int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
+string str;
+map<string,int> dist;
 
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    str="111110111100 110000100000";
+    queue<psii> Q;
+    psii u,v;
+    Q.push(mp(str,mp(2,2)));
+    dist[str]=0;
+    while(!Q.empty())
+    {
+        u=Q.front();
+        Q.pop();
+        if(dist[u.x]>11)break;
+        FOR(i,0,7)
+        {
+            int x=u.y.x+dx[i];
+            int y=u.y.y+dy[i];
+            if(x>=0&&x<5&&y>=0&&y<5)
+            {
+                v=u;
+                v.x[u.y.x*5+u.y.y]=v.x[x*5+y];
+                v.x[x*5+y]=' ';
+                if(!dist[v.x])
+                {
+                    dist[v.x]=dist[u.x]+1;
+                    Q.push(mp(v.x,mp(x,y)));
+                }
+            }
+        }
+    }
     return 0;
 }
+
+
+/*
+3
+01011
+110 1
+01110
+01010
+00100
+10110
+01 11
+10111
+01001
+00000
+11111
+01111
+00 11
+00001
+00000
+*/

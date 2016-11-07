@@ -1,4 +1,3 @@
-
 //Abinash Ghosh(Om)
 #include <cstdio>
 #include <cstdlib>
@@ -33,7 +32,6 @@ using  namespace  std;
 #define FOR(i, b, e) for(int i = b; i <= e; i++)
 #define pr(x) cout<<x<<"\n"
 #define pr2(x,y) cout<<x<<" "<<y<<"\n"
-#define pr3(x,y,z) cout<<x<<" "<<y<<" "<<z<<"\n";
 #define READ(f) freopen(f, "r", stdin)
 #define WRITE(f) freopen(f, "w", stdout)
 
@@ -50,11 +48,47 @@ typedef  vector <ll > vl;
 //int dy[]={0,1,1,1,0,-1,-1,-1};//8 direction
 //int dx[]={2,1,-1,-2,-2,-1,1,2};
 //int dy[]={1,2,2,1,-1,-2,-2,-1};//Knight Direction
-
+#define M 10056
+ll dp[1005];
+int ncr[1005][1005];
+void ncrcal(int n)
+{
+    FOR(i,0,n)ncr[i][0]=1;
+    FOR(i,1,n)
+    {
+        FOR(j,1,i)
+        {
+            ncr[i][j]=(ncr[i-1][j-1]+ncr[i-1][j])%M;
+        }
+    }
+}
+ll solve(int n)
+{
+    if(n==0||n==1)return 1;
+    if(dp[n]!=-1)return dp[n];
+    int ans=0;
+    FOR(i,1,n)
+    {
+        ans=(ans+(ncr[n][i]*solve(n-i))%M)%M;
+    }
+    return dp[n]=ans;
+}
 int main()
 {
     //READ("in.txt");
     //WRITE("out.txt");
-
+    mem(dp,-1);
+    ncrcal(1001);
+    solve(1001);
+    dp[1]=1;
+    int T,n;
+    scanf("%d",&T);
+    FOR(t,1,T)
+    {
+        scanf("%d",&n);
+        printf("Case %d: %lld\n",t,dp[n]);
+    }
     return 0;
 }
+
+
